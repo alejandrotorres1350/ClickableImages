@@ -27,9 +27,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val mOrderMessage: String = getString(R.string.donut_order_message)
         fab.setOnClickListener {
-            val intent: Intent = Intent(this, OrderActivity::class.java)
-            intent.putExtra("ORDER", mOrderMessage)
-            startActivity(intent)
+            gotoOrderActivity(mOrderMessage)
         }
 
         donutImage = findViewById(R.id.donut)
@@ -64,7 +62,24 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_contact -> {
+                displayToast(getString(R.string.action_contact_message))
+                true
+            }
+            R.id.action_status -> {
+                displayToast(getString(R.string.action_status_message))
+                true
+            }
+            R.id.action_favorites -> {
+                displayToast(getString(R.string.action_favorites_message))
+                true
+            }
+            R.id.action_order -> {
+                displayToast(getString(R.string.action_order_message))
+                var mOrderMessage: String = getString(R.string.donut_order_message)
+                gotoOrderActivity(mOrderMessage)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -83,5 +98,11 @@ class MainActivity : AppCompatActivity() {
 
     fun showFroyoOrder(){
         displayToast(getString(R.string.froyo_order_message))
+    }
+
+    fun gotoOrderActivity(mOrderMessage: String){
+        val intent: Intent = Intent(this, OrderActivity::class.java)
+        intent.putExtra("ORDER", mOrderMessage)
+        startActivity(intent)
     }
 }
