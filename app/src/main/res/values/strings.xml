@@ -27,8 +27,12 @@
     </string-array>
 
     <string name="same_day_messenger_service">Same day messenger
-        service</string>
+        service
+    </string>
     <string name="next_day_ground_delivery">Next day ground delivery</string>
     <string name="pick_up">Pick up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

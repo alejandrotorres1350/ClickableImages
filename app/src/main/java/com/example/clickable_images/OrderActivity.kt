@@ -3,6 +3,7 @@ package com.example.clickable_images
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.v4.app.DialogFragment
 import android.view.View
 import android.widget.*
 
@@ -19,6 +20,8 @@ class OrderActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     lateinit var spinner: Spinner
 
+    lateinit var dateBtn: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class OrderActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         sameDayRadioButton = findViewById(R.id.same_day_rad)
         nextDayRadioButton = findViewById(R.id.next_day_rad)
         pickupRadioButton = findViewById(R.id.pick_up_rad)
+        dateBtn = findViewById(R.id.datebtn)
         pickupRadioButton.isChecked = true
 
         spinner = findViewById(R.id.spinner)
@@ -56,6 +60,10 @@ class OrderActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             R.layout.support_simple_spinner_dropdown_item,
             resources.getStringArray(R.array.labels_array)
         )
+
+        dateBtn.setOnClickListener {
+            showDatePicker(dateBtn)
+        }
     }
 
 
@@ -80,6 +88,19 @@ class OrderActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         var spinnerLabel: String = parent!!.getItemAtPosition(position).toString()
         displayToast(spinnerLabel)
+    }
+
+    fun showDatePicker(view: View){
+        val newFragment: DialogFragment = DatePickerFragment()
+        newFragment.show(supportFragmentManager,"datePicker")
+    }
+
+    fun processDAtePickerResult(year: Int, month:Int, day: Int){
+        var monthString: String = (month+1).toString()
+        var dayString: String = (day).toString()
+        var yearString: String = (year).toString()
+        var dateMessage: String = (dayString + "/" + monthString + "/" + yearString)
+        Toast.makeText(applicationContext, dateMessage,Toast.LENGTH_SHORT).show()
     }
 
 }
